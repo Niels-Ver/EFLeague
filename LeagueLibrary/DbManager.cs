@@ -70,7 +70,8 @@ namespace LeagueLibrary
 
         public void VoegTransferToe(Transfer transfer)
         {
-            ctx.Transfers.Add(transfer);
+            //ctx.Transfers.AddRange(transfer);
+            ctx.Add(transfer);
             ctx.SaveChanges();
         }
 
@@ -102,10 +103,12 @@ namespace LeagueLibrary
         public Team SelecteerTeam(int stamnummer)
         {
             Team selectedTeam = ctx.Teams.Single(x => x.StamNummer == stamnummer);
-            foreach (Speler speler in ctx.Spelers.Where(s=>s.TeamStamNummer==stamnummer))
+            List<Speler> spelerList = new List<Speler>();
+            foreach (Speler speler in ctx.Spelers.Where(s => s.TeamStamNummer == stamnummer))
             {
-                selectedTeam.AddSpeler(speler);
+                spelerList.Add(speler);
             }
+            selectedTeam.Spelers = spelerList;
             return selectedTeam;
         }
 

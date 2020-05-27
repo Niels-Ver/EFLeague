@@ -6,9 +6,9 @@ namespace LeagueLibrary.Models
 {
     public class Transfer
     {
-        public Transfer()
+        public Transfer(int transferPrijs)
         {
-
+            TransferPrijs = transferPrijs;
         }
 
         public Transfer(Speler speler, int transferPrijs, Team oudeClub, Team nieuweClub)
